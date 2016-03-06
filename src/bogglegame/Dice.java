@@ -13,6 +13,13 @@ import java.util.List;
  */
 public class Dice {
     
+    /**
+     * Simulates a Boggle game by returning a random
+     * assortment of letters from each specific die.
+     * 
+     * @return diceCharacters The matrix of characters that
+     *                        represent a Boggle board
+     */
     public static List<List<Character>> getDice(){
         int boardSize = 4;
         List<char[]> dice = new ArrayList<>(Arrays.asList(

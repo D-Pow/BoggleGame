@@ -26,6 +26,14 @@ public class Board extends Pane{
     private List<String> correctGuesses;
     private List<String> incorrectGuesses;
     
+    /**
+     * Instantiates a new playing board complete with
+     * a grid showing the character choices and a text
+     * area for user input.
+     * 
+     * @param startWidth The width of the board
+     * @param startHeight The height of the board
+     */
     public Board(int startWidth, int startHeight){
         dictionary = new Dictionary();
         characters = Dice.getDice();
@@ -61,6 +69,14 @@ public class Board extends Pane{
         this.getChildren().addAll(grid, textArea);
     }
     
+    /**
+     * Takes the user's input and:
+     * 1) scores the guessed words
+     * 2) segregates words based on correct or incorrect guesses
+     * 3) replaces the textArea content with the score, correct
+     *    and incorrect guesses, and the missed words that were
+     *    possible to make given the characters on the board.
+     */
     public void play(){
         String input = textArea.getText();
         input = input.toLowerCase();
@@ -88,6 +104,14 @@ public class Board extends Pane{
         textArea.setEditable(false);
     }
     
+    /**
+     * Returns all possible character combinations on the board that
+     * make correct words according to the supplied dictionary file.
+     * 
+     * @param characters The characters given by the current Boggle board
+     * @return validWords The set of words that would be valid according
+     *                    to the supplied dictionary
+     */
     public Set<String> getLegalWords(List<List<Character>> characters){
         Set<String> validWords = new TreeSet<>();
         List<BoardCharacter> boardCharacters = BoardCharacter.createBoardCharacters(characters);
@@ -122,6 +146,12 @@ public class Board extends Pane{
         return score;
     }
     
+    /**
+     * Scores a word based on its length.
+     * 
+     * @param word The word to be scored
+     * @return The score value for the word
+     */
     public int scoreWord(String word){
         int len = word.length();
         if (len >= 8) {
