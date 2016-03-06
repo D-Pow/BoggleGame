@@ -4,7 +4,6 @@ import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
@@ -14,13 +13,12 @@ import javafx.stage.Stage;
  * @author dPow 3-5-16
  */
 public class Main extends Application{
-    Board board;
-    HBox buttonBox;
-    BorderPane pane;
-    Button playButton;
-    Button resetButton;
-    AnchorPane anchorPane;
-    Scene scene;
+    Board board;            //Boggle board
+    HBox buttonBox;         //Button functionality
+    BorderPane pane;        //Pane holding the board and buttons
+    Button playButton;      //Scores user's input
+    Button resetButton;     //Resets the Boggle board
+    Scene scene;            //Scene for the stage
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -46,16 +44,7 @@ public class Main extends Application{
         });
         buttonBox.getChildren().addAll(playButton, resetButton);
         
-        //AnchorPane makes other panes resize automatically
-        anchorPane = new AnchorPane();
-        anchorPane.getChildren().add(pane);
-        
-        AnchorPane.setTopAnchor(pane, 0.0);
-        AnchorPane.setRightAnchor(pane, 0.0);
-        AnchorPane.setBottomAnchor(pane, 0.0);
-        AnchorPane.setLeftAnchor(pane, 0.0);
-        
-        scene = new Scene(anchorPane, startWidth, startHeight);
+        scene = new Scene(pane, startWidth, startHeight);
         stage.setScene(scene);
         stage.setTitle("Boggle");
         stage.show();
