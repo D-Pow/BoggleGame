@@ -55,7 +55,6 @@ public class Board extends Pane{
         textArea = new TextArea();
         textArea.setWrapText(true);
         textArea.setPrefSize(startWidth/2, startHeight/8);
-        //textArea.setLayoutX((startWidth - textArea.getPrefWidth())/2);
         textArea.setLayoutX(startWidth/4);
         textArea.setLayoutY(startHeight - startHeight/3);
         
@@ -64,22 +63,29 @@ public class Board extends Pane{
     
     public void play(){
         String input = textArea.getText();
+        input = input.toLowerCase();
         String[] userGuesses = input.split("\\W+");
         int score = scoreUserInput(userGuesses);
+        textArea.clear();
         
+        String results = String.format("Score: %d%n%n", score);
+        results += "Correct Guesses: \n";
         for (String correctGuess : correctGuesses){
-            
+            results += correctGuess + " ";
         }
+        results += "\n\nIncorrect Guesses: \n";
         for (String incorrectGuess : incorrectGuesses){
-            
+            results += incorrectGuess + " ";
         }
-        for (String possibleWord : legalWords){
-            if (!correctGuesses.contains(possibleWord)){
-                
+        results += "\n\nMissed Words: \n";
+        for (String missedWord : legalWords){
+            if (!correctGuesses.contains(missedWord)){
+                results += missedWord + " ";
             }
         }
         
-        this.getChildren().remove(textArea);
+        textArea.setText(results);
+        textArea.setEditable(false);
     }
     
     public Set<String> getLegalWords(List<List<Character>> characters){

@@ -32,7 +32,7 @@ public class Dictionary {
                     keepReading = false;
                     break;
                 }
-                words.add(word);
+                words.add(word.toLowerCase());
             }
             //No need to close BufferedReader; it is in try-with-resources
         } catch (IOException ioe) {
@@ -45,7 +45,7 @@ public class Dictionary {
             //the actual word
             for (int i = 1; i < word.length(); i++){
                 String prefix = word.substring(0, i);
-                prefixes.add(prefix);
+                prefixes.add(prefix.toLowerCase());
             }
         }
     }
