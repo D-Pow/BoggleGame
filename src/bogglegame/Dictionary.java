@@ -15,7 +15,7 @@ import java.util.Set;
  * e.g. "dictiona" and "di" and "dictionar" are all prefixes
  * of the word "dictionary"
  *
- * @author DP 3-5-16
+ * @author dPow 3-5-16
  */
 public class Dictionary {
     private Set<String> words;
@@ -23,7 +23,7 @@ public class Dictionary {
     
     public Dictionary(){
         words = new HashSet<>();
-        InputStream wordsFile = this.getClass().getResourceAsStream("boggledictionary/AcceptableWords.txt");
+        InputStream wordsFile = this.getClass().getResourceAsStream("/boggledictionary/AcceptableWords.txt");
         boolean keepReading = true;
         try (BufferedReader br = new BufferedReader(new InputStreamReader(wordsFile))){
             while (keepReading){

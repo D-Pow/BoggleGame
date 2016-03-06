@@ -5,10 +5,11 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * The character on the Boggle board. Complete
- * with the character represented and a boolean
- * array showing where neighbor characters are.
- 
+ * A BoardCharacter represents a character on
+ * the Boggle board. Complete with the character
+ * represented and a boolean array showing where
+ * the neighboring characters are.
+ * 
  * Includes a method for converting a matrix of
  * characters into BoardCharacters, and another
  * method for constructing all possible words on
@@ -16,7 +17,7 @@ import java.util.Set;
  * BoardCharacters returned from the aforementioned
  * method.
  * 
- * @author DP
+ * @author dPow 3-5-16
  */
 public class BoardCharacter {
     public Character character;

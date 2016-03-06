@@ -9,7 +9,7 @@ import java.util.List;
  * The Dice class is a collection of the dice
  * that would be used in a game of Boggle.
  *
- * @author DP
+ * @author dPow
  */
 public class Dice {
     
@@ -32,14 +32,18 @@ public class Dice {
                     new char[]{'o', 'w', 't', 'o', 'a', 't'},
                     new char[]{'e', 'i', 'u', 'n', 'e', 's'},
                     new char[]{'a', 'e', 'a', 'n', 'e', 'g'}));
-        Collections.shuffle(dice);
         
+        //Shuffle the distribution of the dice
+        Collections.shuffle(dice);
         List<List<Character>> diceCharacters = new ArrayList<>();
+        
         for (int row = 0; row < boardSize; row++){
             List<Character> boardRow = new ArrayList<>();
             for (int col = 0; col < boardSize; col++){
+                //Select the next die in the dice list
+                int diceNumber = row*boardSize + col;
+                //Pick a random letter on the die
                 int letterIndex = (int) Math.round(Math.random()*5);
-                int diceNumber = row*4 + col;
                 boardRow.add(dice.get(diceNumber)[letterIndex]);
             }
             diceCharacters.add(boardRow);
