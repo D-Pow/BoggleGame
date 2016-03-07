@@ -138,7 +138,7 @@ public class Board extends Pane{
         int score = 0;
         
         for (String word : guesses){
-            if (dictionary.contains(word)) {
+            if (legalWords.contains(word)) {
                 correctGuesses.add(word);
                 score += scoreWord(word);
             } else {

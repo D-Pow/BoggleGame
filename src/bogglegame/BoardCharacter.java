@@ -166,10 +166,10 @@ public class BoardCharacter {
         } else{
             //Append the current character to the word being constructed
             word = previousWord + ch.character.toString();
-            //If the character is 'q', then add a 'u' after it
-            if (ch.equals('q')){
-                word += 'u';
-            }
+        }
+        //If the character is 'q', then add a 'u' after it
+        if (ch.character.toString().equals("q")){
+            word += "u";
         }
         //Add the current character to the usedCharacters list
         usedCharacters.add(ch);
