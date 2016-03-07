@@ -52,6 +52,10 @@ public class Board extends Pane{
                 Font font = new Font("vernanda", SIZE*15);
                 character.setFont(font);
                 String c = characters.get(row).get(col).toString();
+                //If the character is a 'q', then add a 'u' after it
+                if (c.equals("q")){
+                    c = "qu";
+                }
                 character.setText(c);
                 grid.add(character, col, row);
             }

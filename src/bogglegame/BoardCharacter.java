@@ -166,6 +166,10 @@ public class BoardCharacter {
         } else{
             //Append the current character to the word being constructed
             word = previousWord + ch.character.toString();
+            //If the character is 'q', then add a 'u' after it
+            if (ch.equals('q')){
+                word += 'u';
+            }
         }
         //Add the current character to the usedCharacters list
         usedCharacters.add(ch);
@@ -224,9 +228,11 @@ public class BoardCharacter {
             checkNewBoardChar(charIndex, word, boardCharacterList, legalWords, dict,
                     boardWidth, previousWord, usedCharacters);
         }
-        if (dict.contains(word)){
+        if (dict.contains(word) && word.length() > 2){
             //Only add words that are in the dictionary.
             //Do not add prefixes.
+            //Do not add two-letter words because they do not
+            //add to the score.
             legalWords.add(word);
         }
     }
