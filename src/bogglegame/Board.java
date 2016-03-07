@@ -1,6 +1,5 @@
 package bogglegame;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
@@ -23,8 +22,8 @@ public class Board extends Pane{
     public List<List<Character>> characters;
     private Set<String> legalWords;
     private TextArea textArea;
-    private List<String> correctGuesses;
-    private List<String> incorrectGuesses;
+    private Set<String> correctGuesses;
+    private Set<String> incorrectGuesses;
     
     /**
      * Instantiates a new playing board complete with
@@ -71,7 +70,7 @@ public class Board extends Pane{
     
     /**
      * Takes the user's input and:
-     * 1) scores the guessed words
+     * 1) scores the guessed words (excluding repeats)
      * 2) segregates words based on correct or incorrect guesses
      * 3) replaces the textArea content with the score, correct
      *    and incorrect guesses, and the missed words that were
@@ -130,8 +129,8 @@ public class Board extends Pane{
      * @return score
      */
     public int scoreUserInput(String[] guesses){
-        correctGuesses = new ArrayList<>();
-        incorrectGuesses = new ArrayList<>();
+        correctGuesses = new TreeSet<>();
+        incorrectGuesses = new TreeSet<>();
         int score = 0;
         
         for (String word : guesses){
