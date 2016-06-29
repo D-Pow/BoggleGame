@@ -1,11 +1,15 @@
 package bogglegame;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.TextArea;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
@@ -24,6 +28,7 @@ public class Board extends Pane{
     private TextArea textArea;
     private Set<String> correctGuesses;
     private Set<String> incorrectGuesses;
+    private boolean justPlayed; //Prevents playing the same board twice
     
     /**
      * Instantiates a new playing board complete with
@@ -33,10 +38,11 @@ public class Board extends Pane{
      * @param startWidth The width of the board
      * @param startHeight The height of the board
      */
-    public Board(int startWidth, int startHeight){
+    public Board(int startWidth, int startHeight, Main driver){
         dictionary = new Dictionary();
         characters = Dice.getDice();
         legalWords = getLegalWords(characters);
+        justPlayed = false;
         
         this.setWidth(startWidth);
         this.setHeight(startHeight);
@@ -68,6 +74,16 @@ public class Board extends Pane{
         textArea.setPrefSize(startWidth/2, startHeight/8);
         textArea.setLayoutX(startWidth/4);
         textArea.setLayoutY(startHeight - startHeight/3);
+        textArea.requestFocus();
+        textArea.setOnKeyPressed(new EventHandler<KeyEvent>(){
+            @Override
+            public void handle(KeyEvent e) {
+                if (e.getCode() == KeyCode.TAB) {
+                    driver.playButton.requestFocus();
+                    e.consume();
+                }
+            }
+        });
         
         this.getChildren().addAll(grid, textArea);
     }
@@ -81,9 +97,18 @@ public class Board extends Pane{
      *    possible to make given the characters on the board.
      */
     public void play(){
+        //Prevent playing the same board twice
+        if (justPlayed) {
+            return;
+        }
+        justPlayed = true;
         String input = textArea.getText();
         input = input.toLowerCase();
-        String[] userGuesses = input.split("\\W+");
+        Set<String> userGuesses = new HashSet<>();
+        String[] guesses = input.split("\\W+");
+        for (String word : guesses) {
+            userGuesses.add(word);
+        }
         int score = scoreUserInput(userGuesses);
         textArea.clear();
         
@@ -132,7 +157,7 @@ public class Board extends Pane{
      * @param guesses Array of the user's guesses
      * @return score
      */
-    public int scoreUserInput(String[] guesses){
+    public int scoreUserInput(Set<String> guesses){
         correctGuesses = new TreeSet<>();
         incorrectGuesses = new TreeSet<>();
         int score = 0;
